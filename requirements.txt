@@ -1,0 +1,7 @@
+streamlit
+transformers
+torch
+newsapi-python
+python-dotenv
+bs4
+plotly
