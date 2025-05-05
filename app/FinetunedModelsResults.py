@@ -3,7 +3,7 @@ import pandas as pd
 import plotly.express as px
 
 def main():
-    st.title("🧪 Finetuned Models Results")
+    st.title("🧪 Fine-tuned Models' Results")
 
     # Define results as a dictionary
     results = {

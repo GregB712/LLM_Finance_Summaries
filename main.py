@@ -9,7 +9,7 @@ PAGES = {
     "🧠 Summarize": "app.Summarize",
     "📖 View Summarized Articles": "app.ViewSummarizedArticles",
     "📊 Fine-tuned Model Metrics": "app.ViewFinetunedMetrics",
-    "🧪 Fine-tuned Models Results": "app.FinetunedModelsResults",
+    "🧪 Fine-tuned Models' Results": "app.FinetunedModelsResults",
     "⚙️ Project Setup & Installation": "app.Setup_and_Installation",
     "ℹ️ About": "app.About"
 }
