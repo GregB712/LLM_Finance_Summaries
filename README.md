@@ -123,6 +123,12 @@ docker run -p 8501:8501 --env-file .env summarizer-app
 ```
 LLM_Finance_Summaries
 ├── Dockerfile
+├── LICENSE
+├── README.md
+├── REPORTS
+│   ├── REPORT.html
+│   ├── REPORT.md
+│   └── REPORT.pdf
 ├── app
 │   ├── About.py
 │   ├── Database.py
@@ -135,16 +141,67 @@ LLM_Finance_Summaries
 │   ├── ViewSummarizedArticles.py
 │   └── __init__.py
 ├── app.py
+├── assets
+│   ├── 1_Article_Summarizer_App.png
+│   ├── 2_Fetch_Articles_From_NewsAPI.png
+│   ├── 3_Article_Summarizer.png
+│   ├── 4_View_Summarized_Articles.png
+│   ├── 5_Fine-tuned_Model_Metrics.png
+│   ├── 6_Finetuned_Models_Results.png
+│   ├── 7_Project_Setup_Installation.png
+│   ├── 8_About_This_Project.png
+│   └── Summaries_Comparison.png
 ├── data
+│   ├── articles.json
+│   ├── bart-large-cnn
+│   │   ├── summarized_articles_bart-large-cnn.json
+│   │   ├── summary_metrics_bart-large-cnn.csv
+│   │   ├── test_bart-large-cnn.jsonl
+│   │   └── train_bart-large-cnn.jsonl
+│   ├── pegasus-cnn_dailymail
+│   │   ├── summarized_articles_pegasus-cnn_dailymail.json
+│   │   ├── summary_metrics_pegasus-cnn_dailymail.csv
+│   │   ├── test_pegasus-cnn_dailymail.jsonl
+│   │   └── train_pegasus-cnn_dailymail.jsonl
+│   ├── pegasus-multi_news
+│   │   ├── summarized_articles_pegasus-multi_news.json
+│   │   ├── summary_metrics_pegasus-multi_news.csv
+│   │   ├── test_pegasus-multi_news.jsonl
+│   │   └── train_pegasus-multi_news.jsonl
+│   ├── pegasus-xsum
+│   │   ├── summarized_articles_pegasus-xsum.json
+│   │   ├── summary_metrics_pegasus-xsum.csv
+│   │   ├── test_pegasus-xsum.jsonl
+│   │   └── train_pegasus-xsum.jsonl
+│   ├── test_summarized_articles.jsonl
+│   └── train_summarized_articles.jsonl
 ├── main.py
-├── models/                 <-- You need to create this manually and add your models
+├── models <-- You need to create this manually and add your models
+│   ├── facebook-bart-large-cnn
+│   │   ├── config.json
+│   │   ├── generation_config.json
+│   │   ├── merges.txt
+│   │   ├── model.safetensors
+│   │   ├── special_tokens_map.json
+│   │   ├── tokenizer.json
+│   │   ├── tokenizer_config.json
+│   │   └── vocab.json
+│   └── google-pegasus-cnn_dailymail
+│       ├── config.json
+│       ├── generation_config.json
+│       ├── model.safetensors
+│       ├── special_tokens_map.json
+│       ├── spiece.model
+│       ├── tokenizer.json
+│       └── tokenizer_config.json
 ├── notebooks
+│   ├── LLM_Finance_Summaries_Dataset.ipynb
+│   ├── LLM_Finance_Summaries_Metrics.ipynb
+│   └── LLM_Finance_Summaries_Train.ipynb
 ├── requirements.txt
 ├── utils
 │   ├── __init__.py
 │   ├── article_store.py
-│   ├── config.py
-│   ├── news_fetcher.py
 │   ├── newsapi.py
 │   ├── preprocessor.py
 │   └── summarizer.py
