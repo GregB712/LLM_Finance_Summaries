@@ -176,7 +176,7 @@ LLM_Finance_Summaries
 │   ├── test_summarized_articles.jsonl
 │   └── train_summarized_articles.jsonl
 ├── main.py
-├── models <-- You need to create this manually and add your models
+├── models                    <-- You need to create this manually and add your models
 │   ├── facebook-bart-large-cnn
 │   │   ├── config.json
 │   │   ├── generation_config.json
