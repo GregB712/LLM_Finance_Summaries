@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>REPORT.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="%F0%9F%93%84-technical-report-news-summarization-app">📄 <strong>Technical Report: News Summarization App</strong></h1>
+<p><strong>Author:</strong> Gregory Barbas<br>
+<strong>Project:</strong> LLM_Finance_Summaries<br>
+<strong>Date:</strong> 05 May 2025</p>
+<h2 id="1%EF%B8%8F%E2%83%A3-introduction">1️⃣ <strong>Introduction</strong></h2>
+<p>This report documents the development of a news summarization application as part of an interview assignment. The app ingests news articles, generates summaries using pre-trained transformer models, evaluates their quality, and exposes the results via an interactive Streamlit interface.</p>
+<p>The report includes the technical choices made, their rationale, challenges encountered, evaluation metrics, and example outputs.</p>
+<hr>
+<h2 id="2%EF%B8%8F%E2%83%A3-technical-choices">2️⃣ <strong>Technical Choices</strong></h2>
+<h3 id="21-tech-stack-choices"><strong>2.1 Tech Stack Choices</strong></h3>
+<ul>
+<li>
+<p><strong>Streamlit</strong> for rapid prototyping of an interactive UI</p>
+</li>
+<li>
+<p><strong>Docker</strong> for environment consistency and deployment</p>
+</li>
+<li>
+<p><strong>Hugging Face Transformers</strong> for model loading/inference</p>
+</li>
+<li>
+<p><strong>spaCy + NLTK</strong> for light preprocessing</p>
+</li>
+<li>
+<p><strong><code>evaluate</code> library</strong> for ROUGE, BLEU, METEOR, BERTScore metrics</p>
+</li>
+</ul>
+<p>✅ <strong>Reasoning:</strong><br>
+These libraries enabled me to focus on building features without reinventing tools for NLP, while also keeping the system modular for experimentation.</p>
+<h3 id="22-model-selection">2.2 <strong>Model Selection</strong></h3>
+<p>For this project, we explored four pre-trained transformer-based summarization models:</p>
+<table>
+<thead>
+<tr>
+<th>Model</th>
+<th>Architecture</th>
+<th>Pre-training Dataset</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>facebook/bart-large-cnn</td>
+<td>BART</td>
+<td>CNN/DailyMail</td>
+</tr>
+<tr>
+<td>google/pegasus-cnn_dailymail</td>
+<td>PEGASUS</td>
+<td>CNN/DailyMail</td>
+</tr>
+<tr>
+<td>google/pegasus-xsum</td>
+<td>PEGASUS</td>
+<td>XSum</td>
+</tr>
+<tr>
+<td>google/pegasus-multi_news</td>
+<td>PEGASUS</td>
+<td>Multi-News</td>
+</tr>
+</tbody>
+</table>
+<p>Additionally, we fine-tuned the <code>sshleifer/distilbart-cnn-12-6</code> model using a custom dataset we created. This dataset consisted of news articles paired with summaries generated by the four base models.</p>
+<p>✅ <strong>Reasoning:</strong></p>
+<ul>
+<li>
+<p>BART and PEGASUS are state-of-the-art for abstractive summarization.</p>
+</li>
+<li>
+<p>We wanted to compare performance across models trained on different source datasets (CNN/DailyMail vs XSum vs Multi-News).</p>
+</li>
+<li>
+<p>We explored fine-tuning on a small dataset to test domain adaptation within resource constraints.</p>
+</li>
+<li>
+<p>Rather than hand-labeling summaries (costly, slow), we used multiple model-generated summaries to simulate a diverse annotation process.</p>
+</li>
+<li>
+<p>Trade-Offs Considered:</p>
+<ul>
+<li>Using pre-generated summaries reduces human oversight → risk of propagating model biases/hallucinations</li>
+<li>Faster data curation at the expense of gold-standard references</li>
+</ul>
+</li>
+</ul>
+<h3 id="23-fine-tuning-configuration-and-strategy">2.3 <strong>Fine-tuning Configuration and Strategy</strong></h3>
+<p>We created a dataset of <strong>83 articles</strong> (50 for training 33 for testing), each paired with summaries from the four pre-trained models. Fine-tuning was performed for <strong>2 epochs</strong> on Google Colab's free GPU (Tesla T4), taking ~30-40 minutes per run.</p>
+<p>We approached the task as a supervised learning problem, using the outputs of existing models as pseudo-labels for fine-tuning <code>distilbart-cnn-12-6</code>. This aimed to blend the strengths of various models, leveraging model diversity as a proxy for ensemble distillation.</p>
+<p>Key aspects:</p>
+<ul>
+<li>
+<p>Training dataset: ~50 samples (from JSONL file)</p>
+</li>
+<li>
+<p>Input: original news content</p>
+</li>
+<li>
+<p>Target: summaries from individual models (used separately for multiple fine-tuning runs)</p>
+</li>
+<li>
+<p>No additional pre-processing beyond token cleaning and truncation</p>
+</li>
+</ul>
+<p>✅ <strong>Reasoning:</strong></p>
+<ul>
+<li>
+<p>Limited GPU time (single-GPU training) → opted for <code>distilbart-cnn-12-6</code> due to its lighter footprint compared to full BART</p>
+</li>
+<li>
+<p>Dataset size was limited to keep training feasible within Colab's free GPU limits.</p>
+</li>
+<li>
+<p>2 epochs provided a balance between convergence and runtime</p>
+<blockquote>
+<p>Due to the limited dataset size (50 articles) and hardware constraints (free Colab GPU), we opted for 2 epochs to avoid overfitting while ensuring the model could converge. Early experiments showed that increasing to 3–4 epochs did not yield noticeable performance gains and introduced slight overfitting to the pseudo-labels..</p>
+</blockquote>
+</li>
+</ul>
+<h4 id="24-data-sources">2.4. <strong>Data Sources</strong></h4>
+<p>The dataset was manually compiled from real-world news articles scraped or collected via public APIs, covering diverse publishers and topics. Each article includes title, author, source, content, and metadata.</p>
+<hr>
+<h2 id="3%EF%B8%8F%E2%83%A3-app-architecture">3️⃣ <strong>App Architecture</strong></h2>
+<p>Below is the system architecture of the app:</p>
+<pre class="hljs"><code><div>[ NewsAPI / Scraper ] → [ Database ] → [ Summarization Pipeline ] → [ Evaluation Pipeline ] → [ Streamlit App ]
+
+</div></code></pre>
+<p><strong>Key components:</strong></p>
+<ul>
+<li>
+<p>News scraping via NewsAPI (limited to 50 requests/minute to respect API limits)</p>
+</li>
+<li>
+<p>SQLite database storing articles and summaries</p>
+</li>
+<li>
+<p>Summarization using Hugging Face transformers</p>
+</li>
+<li>
+<p>Evaluation pipeline (detailed below)</p>
+</li>
+<li>
+<p>Interactive visualization via Streamlit</p>
+</li>
+</ul>
+<p><img src="assets/4_View_Summarized_Articles.png" alt="View Summarized Articles"></p>
+<hr>
+<h2 id="4%EF%B8%8F%E2%83%A3-evaluation-framework">4️⃣ <strong>Evaluation Framework</strong></h2>
+<p>We computed both standard NLP metrics and custom factuality measures:</p>
+<h3 id="41-standard-metrics">4.1 <strong>Standard Metrics</strong></h3>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BLEU</td>
+<td>N-gram overlap precision</td>
+</tr>
+<tr>
+<td>METEOR</td>
+<td>Precision &amp; recall with synonymy</td>
+</tr>
+<tr>
+<td>ROUGE-1/2/L</td>
+<td>N-gram &amp; longest common subsequence recall</td>
+</tr>
+<tr>
+<td>BERTScore</td>
+<td>Semantic similarity using BERT embeddings</td>
+</tr>
+</tbody>
+</table>
+<h4 id="411-bleu-bilingual-evaluation-understudy">4.1.1 <strong>BLEU (Bilingual Evaluation Understudy)</strong></h4>
+<p>BLEU measures <strong>precision</strong> (how many predicted n-grams are in the reference):</p>
+<p><img src="assets\bleu_formula.png" alt="BLEU Formula"></p>
+<p><img src="assets\bleu_formula_2.png" alt="BLEU Formula 2"></p>
+<p>✅ <strong>Example:</strong></p>
+<p>Reference: <code>&quot;the cat is on the mat&quot;</code></p>
+<p>Prediction: <code>&quot;the cat the cat on the mat&quot;</code></p>
+<ul>
+<li>
+<p>Precision drops due to repetition.</p>
+</li>
+<li>
+<p>BLEU penalizes repetitive/ungrammatical outputs.</p>
+</li>
+</ul>
+<h4 id="412-meteor-metric-for-evaluation-of-translation-with-explicit-ordering">4.1.2 <strong>METEOR (Metric for Evaluation of Translation with Explicit ORdering)</strong></h4>
+<p>METEOR improves over BLEU by including <strong>stemming</strong>, <strong>synonymy</strong>, and <strong>ordering penalties</strong>.</p>
+<p>It’s calculated as:</p>
+<p><img src="assets\METEOR_formula.png" alt="METEOR Formula"></p>
+<p><img src="assets\METEOR_formula_2.png" alt="METEOR Formula 2"></p>
+<p>✅ <strong>Strength:</strong> sensitive to synonyms (e.g., &quot;boy&quot; ≈ &quot;kid&quot;).</p>
+<h4 id="413-rouge-recall-oriented-understudy-for-gisting-evaluation">4.1.3 <strong>ROUGE (Recall-Oriented Understudy for Gisting Evaluation)</strong></h4>
+<p>ROUGE measures the overlap between the predicted summary and the reference summary.</p>
+<ul>
+<li>
+<p><strong>ROUGE-N:</strong> Overlap of n-grams (contiguous sequences of n words).</p>
+</li>
+<li>
+<p><strong>ROUGE-L:</strong> Longest common subsequence.</p>
+</li>
+</ul>
+<p>The general formula for ROUGE-N recall is:</p>
+<p><img src="assets\ROUGE_formula.png" alt="ROUGE Formula"></p>
+<p>✅ <strong>Example:</strong></p>
+<ul>
+<li>Reference: <code>&quot;The cat sat on the mat.&quot;</code></li>
+<li>Prediction: <code>&quot;A cat was on the mat.&quot;</code></li>
+</ul>
+<p>1-grams in reference: <code>[&quot;the&quot;, &quot;cat&quot;, &quot;sat&quot;, &quot;on&quot;, &quot;the&quot;, &quot;mat&quot;]</code>
+1-grams in prediction: <code>[&quot;a&quot;, &quot;cat&quot;, &quot;was&quot;, &quot;on&quot;, &quot;the&quot;, &quot;mat&quot;]</code>
+Overlapping 1-grams: <code>[&quot;cat&quot;, &quot;on&quot;, &quot;the&quot;, &quot;mat&quot;]</code></p>
+<p><img src="assets\ROUGE_formula_2.png" alt="ROUGE Formula 2"></p>
+<h4 id="414-bertscore">4.1.4 <strong>BERTScore</strong></h4>
+<p>BERTScore uses contextual embeddings from BERT:</p>
+<ul>
+<li>
+<p>Computes cosine similarity between token embeddings.</p>
+</li>
+<li>
+<p>Captures <strong>semantic similarity</strong> instead of just surface overlap.</p>
+</li>
+</ul>
+<p>✅ <strong>Advantage:</strong> can detect paraphrases, latent meaning similarity.</p>
+<h3 id="42-factuality-and-hallucination-detection">4.2 <strong>Factuality and Hallucination Detection</strong></h3>
+<p>To evaluate factual consistency and hallucination in the generated summaries, we implemented a two-stage pipeline:</p>
+<h4 id="421-named-entity-comparison-for-hallucination-detection">4.2.1 <strong>Named Entity Comparison for Hallucination Detection</strong></h4>
+<p>We used <strong>spaCy’s Named Entity Recognition (NER)</strong> model to extract named entities from the predicted summary. These extracted entities were compared against the original article content:</p>
+<ul>
+<li>
+<p>Any entity present in the summary but <strong>not found in the original article</strong> (ignoring case) was flagged as a <strong>hallucinated entity</strong>.</p>
+</li>
+<li>
+<p>The hallucination rate was computed as the <strong>average number of hallucinated entities per summary</strong> across the dataset.</p>
+</li>
+</ul>
+<p>👉 This method helps detect whether the summarization model introduces entities or facts not grounded in the source material.</p>
+<p>Example formula:</p>
+<p><img src="assets\hallucination_rate.png" alt="Hallucination Rate"></p>
+<p>❌ <strong>Example hallucination:</strong>
+<em>Original article:</em>
+<code>&quot;The CEO announced record profits.&quot;</code></p>
+<p><em>Model summary:</em>
+<code>&quot;The CEO announced record profits and plans to acquire a competitor.&quot;</code></p>
+<p>→ ⚠️ The acquisition part is <strong>invented</strong>.</p>
+<blockquote>
+<p>Hallucinations harm trust and factual correctness.</p>
+</blockquote>
+<h4 id="422-qa-based-factual-consistency-check">4.2.2 <strong>QA-Based Factual Consistency Check</strong></h4>
+<p>In addition to entity-level checks, we used a <strong>question-answering (QA) model</strong> to assess factual consistency between the summary and the article:</p>
+<ul>
+<li>
+<p>We extracted <strong>noun chunks</strong> (key phrases) from the summary using spaCy.</p>
+</li>
+<li>
+<p>For each noun chunk, we <strong>formulated a factual question</strong> in the template:</p>
+<blockquote>
+<p>“What about {noun chunk}?”</p>
+</blockquote>
+</li>
+<li>
+<p>We used a <strong>QA pipeline (e.g., Hugging Face Transformers <code>pipeline(task=&quot;question-answering&quot;)</code>)</strong> to answer these questions using the original article content as the context.</p>
+</li>
+</ul>
+<p>We then evaluated:</p>
+<ul>
+<li>
+<p>Whether the QA model could produce an answer (non-empty answer string)</p>
+</li>
+<li>
+<p>The model’s confidence score for each answer</p>
+</li>
+</ul>
+<p>A <strong>factual consistency score</strong> was computed as:</p>
+<p><img src="assets\factual_score.png" alt="Factual Score"></p>
+<p>✅ <strong>Interpretation:</strong></p>
+<ul>
+<li>A factual score of <code>1.0</code> → all key facts in the summary are verifiable in the content.</li>
+<li>A factual score of <code>0.0</code> → no key facts are verifiable.</li>
+</ul>
+<p>👉 This metric reflects <strong>how many concepts mentioned in the summary can be validated or supported by evidence in the original article</strong>.</p>
+<p>✅ <strong>Reasoning:</strong></p>
+<p>By combining entity comparison and QA-based consistency checks, we aimed to capture both <strong>surface-level hallucination (missing or fabricated entities)</strong> and <strong>deeper factual gaps (concepts implied but unsupported)</strong>.</p>
+<p>This analysis informed both <strong>model selection</strong> (favoring models with fewer hallucinations and higher factual scores) and potential <strong>post-processing steps</strong> (e.g., flagging summaries for review).</p>
+<hr>
+<h2 id="5%EF%B8%8F%E2%83%A3-evaluation-results">5️⃣ <strong>Evaluation Results</strong></h2>
+<table>
+<thead>
+<tr>
+<th>Model</th>
+<th>BLEU</th>
+<th>METEOR</th>
+<th>ROUGE-1</th>
+<th>ROUGE-2</th>
+<th>ROUGE-L</th>
+<th>BERTScore</th>
+<th>Factual</th>
+<th>Hallucinated Entities</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>bart-large-cnn</td>
+<td>0.366</td>
+<td>0.580</td>
+<td>0.593</td>
+<td>0.487</td>
+<td>0.544</td>
+<td>0.487</td>
+<td>1.0</td>
+<td>0.23</td>
+</tr>
+<tr>
+<td>pegasus-cnn_dailymail</td>
+<td>0.321</td>
+<td>0.570</td>
+<td>0.572</td>
+<td>0.452</td>
+<td>0.532</td>
+<td>0.386</td>
+<td>1.0</td>
+<td>0.36</td>
+</tr>
+<tr>
+<td>pegasus-xsum</td>
+<td>0.134</td>
+<td>0.325</td>
+<td>0.344</td>
+<td>0.204</td>
+<td>0.291</td>
+<td>0.252</td>
+<td>1.0</td>
+<td>0.41</td>
+</tr>
+<tr>
+<td>pegasus-multi_news</td>
+<td>0.074</td>
+<td>0.304</td>
+<td>0.334</td>
+<td>0.138</td>
+<td>0.244</td>
+<td>0.176</td>
+<td>1.0</td>
+<td>0.77</td>
+</tr>
+</tbody>
+</table>
+<p>✅ <strong>Key observations:</strong></p>
+<ul>
+<li>
+<p><code>BART</code> summaries were readable but sometimes extractive rather than abstractive.</p>
+</li>
+<li>
+<p><code>Pegasus</code> produced more concise and fluent summaries, but occasionally introduced hallucinated facts.</p>
+</li>
+<li>
+<p><code>bart-large-cnn</code> and <code>pegasus-cnn_dailymail</code> outperformed others in ROUGE, BLEU, METEOR, and factuality.</p>
+</li>
+<li>
+<p><code>pegasus-multi_news</code> had the highest hallucination rate and lowest scores → unsuitable for high-accuracy summaries.</p>
+</li>
+</ul>
+<hr>
+<h2 id="6%EF%B8%8F%E2%83%A3-challenges-and-resolutions">6️⃣ <strong>Challenges and Resolutions</strong></h2>
+<table>
+<thead>
+<tr>
+<th>Challenge</th>
+<th>Resolution</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Limited GPU resources</td>
+<td>Reduced dataset to 50 articles; used Colab free tier</td>
+</tr>
+<tr>
+<td>Rate limits on NewsAPI</td>
+<td>Throttled requests to <strong>50 requests/minute</strong></td>
+</tr>
+<tr>
+<td>Some summaries missing key info</td>
+<td>Added factual QA evaluation to catch omissions</td>
+</tr>
+<tr>
+<td>Hallucinated entities in summaries</td>
+<td>Tracked hallucination rates per model; selected <code>bart-large-cnn</code> for better factual grounding</td>
+</tr>
+<tr>
+<td>Varying summary lengths across models</td>
+<td>Added post-processing rules to normalize lengths</td>
+</tr>
+</tbody>
+</table>
+<p>Additionally:</p>
+<ul>
+<li>I handled <strong>API key management via <code>.env</code></strong> for security.</li>
+<li>Configured <strong>modular code</strong> so UI and back-end logic are decoupled (for maintainability).</li>
+</ul>
+<hr>
+<h2 id="7%EF%B8%8F%E2%83%A3-example-output">7️⃣ <strong>Example Output</strong></h2>
+<p><strong>Original Title:</strong> Apple May Face Criminal Charges for Allegedly Lying to a Federal Judge</p>
+<p><strong>Source:</strong> Wired</p>
+<p><strong>Original Content Snippet:</strong></p>
+<blockquote>
+<p>Apple &quot;willfully chose not to comply&quot; with a court order... Judge Yvonne Gonzalez Rogers has referred the situation to the US Attorney’s Office... Epic Games challenged in court...</p>
+</blockquote>
+<p><strong>Summaries:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Model</th>
+<th>Summary</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>bart-large-cnn</td>
+<td>&quot;Judge Yvonne Gonzalez Rogers has referred the situation to the US Attorney’s Office in San Francisco. In 2021, Gonzalez Rogers presided over a lawsuit brought by Fortnite developer Epic Games over the iPhone maker’s...&quot;</td>
+</tr>
+<tr>
+<td>pegasus-xsum</td>
+<td>&quot;The US government is investigating whether Apple should face criminal contempt charges for failing to comply with a court order.&quot;</td>
+</tr>
+<tr>
+<td>pegasus-multi_news</td>
+<td>&quot;Apple 'willfully chose not to comply' with a court order to loosen its app store restrictions—and one of its executives lied under oath about the company's plans, a federal judge wrote Wednesday. US District Judge Yvonne...&quot;</td>
+</tr>
+<tr>
+<td>pegasus-cnn_dailymail</td>
+<td>&quot;Judge Yvonne Gonzalez Rogers has referred the situation to the US Attorney’s Office in San Francisco.In 2021, Gonzalez Rogers presided over a lawsuit brought by developer Epic Games over Apple’s allegedly anticompetitive practices.She...&quot;</td>
+</tr>
+</tbody>
+</table>
+<p>✅ <strong>Observation</strong>: <code>bart-large-cnn</code> and <code>pegasus-cnn_dailymail</code> provided more contextually rich summaries without losing factual consistency; <code>pegasus-xsum</code> overly condensed the article.</p>
+<hr>
+<h2 id="8%EF%B8%8F%E2%83%A3-reflection--next-steps">8️⃣ <strong>Reflection &amp; Next Steps</strong></h2>
+<p>✅ <strong>Strengths achieved:</strong></p>
+<ul>
+<li>
+<p>Flexible architecture to swap models/data sources</p>
+</li>
+<li>
+<p>Quantitative + qualitative evaluation workflow</p>
+</li>
+<li>
+<p>User-friendly interface deployable via Docker</p>
+</li>
+</ul>
+<p>🎯 <strong>Planned improvements:</strong></p>
+<ul>
+<li>
+<p>Integrate <strong>fact-checking tools</strong> (e.g., Factual Consistency Evaluation)</p>
+</li>
+<li>
+<p>Implement <strong>feedback loop UI</strong> for user corrections of summaries</p>
+</li>
+<li>
+<p>Explore <strong>domain-specific fine-tuning</strong> for financial jargon</p>
+</li>
+</ul>
+<hr>
+<h2 id="9%EF%B8%8F%E2%83%A3-conclusion">9️⃣ <strong>Conclusion</strong></h2>
+<p>Through systematic evaluation of transformer models, we developed a summarization app capable of both quantitative and factual evaluation of news summaries. Our findings highlight <code>bart-large-cnn</code> as a robust baseline for factual and concise summarization.</p>
+<p>Future improvements could explore larger fine-tuning datasets, better hallucination detection pipelines, or reinforcement learning from human feedback.</p>
+<hr>
+<p><strong>Appendix:</strong> Screenshots of app UI and graphs can be found in the repository under <code>/assets/</code>.</p>
+<p><img src="assets/Summaries_Comparison.png" alt="Summaries Comparison"></p>
+
+</body>
+</html>
